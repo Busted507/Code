@@ -1,0 +1,12 @@
+The code works by:
+1.Run it
+2.it will ask for input for how many packages there are
+3.then ask for input for the weight of the packages 
+4.then it will tell you if it can carry it or not
+
+I have made it by adding the motors which to show how many motors are stored in the packages
+packageWeight is to tell how much the packages weigh
+avgWeight is to calculate the average weight of the motors
+maxLoad is the constant weight of the motors
+
+Then it puts printf in and then scanf for input from the user to tell how many packages and the weight of the packages
