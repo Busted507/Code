@@ -1,0 +1,35 @@
+Hver bold har en position (posx, posy), en hastighed (velx, vely), en radius (radius), en farve (Color) og en pointer (follows) til en anden bold, som den “beundrer” og forsøger at følge.
+
+Initialisering
+
+Funktionen init_balls_random() opretter hver bold med:
+
+En tilfældig position i vinduet,
+
+En tilfældig hastighed,
+
+En tilfældig farve fra en farveliste,
+
+En tilfældig radius inden for de givne grænser,
+
+En pointer til en anden (forskellig) bold, som den skal følge — aldrig sig selv.
+
+Opdateringsløkke
+
+Hver frame:
+
+Justerer programmet boldens hastighed en smule, så den bevæger sig tættere på positionen af den bold, den følger.
+
+Opdaterer boldens position ud fra dens hastighed og sørger for, at den “wrap’er” rundt på skærmen, så den dukker op på modsatte side, hvis den kører ud af vinduet.
+
+Tegner hver bold i vinduet.
+
+Visualisering
+
+Alle bolde bevæger sig og jagter deres udvalgte “beundrede” bold, hvilket skaber interessante bevægelsesmønstre.
+
+Hovedløkke i programmet
+
+Vinduet bliver tegnet om ved en fast FPS,
+
+Boldene bliver løbende opdateret og tegnet.
