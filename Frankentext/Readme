@@ -1,0 +1,59 @@
+
+---
+
+## What the program does
+
+1. Loads `pg84.txt` into memory.
+2. Replaces non-printable characters in the loaded buffer with spaces.
+3. Tokenizes the buffer by splitting on whitespace (space, tab, newline, carriage return).
+4. Builds:
+   - `tokens[]`: unique token pointers (pointing into the `book` buffer).
+   - `succs[][]`: for each token, an array of pointers to successor tokens (also pointing into `book` buffer).
+   - `succs_sizes[]`: per-token successor counts.
+5. Generates sentences by:
+   - Picking a token that starts with an uppercase letter as the first token.
+   - Repeatedly choosing a random successor until a sentence-ending punctuation is found or no successor exists.
+6. Prints a generated sentence ending with `?` and then a sentence ending with `!`.
+
+---
+
+
+## Running
+
+Place the Project Gutenberg plaintext of Frankenstein in the program's working directory under the name `pg84.txt`.
+
+Then run:
+
+./markov_frank
+
+The program prints two sentences:
+- First a sentence ending with `?` (a question).
+- Then a sentence ending with `!` (an exclamation).
+
+Example stdout:
+"Was it a dream?"  
+"How glorious!"
+
+Error messages (file loading errors, or internal errors) are printed to stderr.
+
+---
+
+## Important source details
+
+Key data structures:
+- `char *book` — pointer to the loaded book buffer (malloc'd).
+- `char *tokens[MAX_WORD_COUNT]` — array holding pointers to the unique tokens. Tokens are not copied: the pointers reference locations inside `book` (the program uses strtok_r to split the buffer in place).
+- `char *succs[MAX_WORD_COUNT][MAX_SUCCESSOR_COUNT]` — for each token, a fixed-size array of pointers to successor tokens.
+- `size_t succs_sizes[MAX_WORD_COUNT]` — number of successors for each token.
+
+Main functions:
+- `replace_non_printable_chars_with_space()` — overwrites non-printable characters in `book` with spaces to avoid spurious tokens.
+- `token_id(char *token)` — lookup token index by string; inserts the token pointer into `tokens[]` if not present.
+- `append_to_succs(char *token, char *succ)` — append a successor token pointer into the succs table for `token`.
+- `tokenize_and_fill_succs(char *delimiters, char *str)` — tokenizes `str` using `strtok_r` and populates `tokens` and `succs`.
+- `random_token_id_that_starts_a_sentence()` — selects a token id whose first character is uppercase (tries random sampling then linear scan).
+- `generate_sentence(char *sentence, size_t sentence_size)` — builds a sentence string by concatenating tokens separated by spaces until a sentence-terminating token is reached or the buffer is full.
+
+---
+
+
