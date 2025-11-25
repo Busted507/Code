@@ -1,0 +1,57 @@
+# Playlist Linked List
+
+Simple C project that demonstrates building and manipulating a singly linked list to load, modify, and save a playlist. The program reads track lines from `playlist.txt`, builds a linked list of tracks, deletes a track, inserts a new track, and writes the result to `playlist-out.txt`.
+
+## Features
+- Read playlist lines from a fixed input file (`playlist.txt`)
+- Store each line in a singly linked list
+- Delete the 4th track (0-indexed index 4 is removed in provided code)
+- Insert a new track ("Tarkan – Şımarık 💋") at position 3
+- Save updated playlist to `playlist-out.txt`
+- Handles lines that may not end with a newline
+
+## Files
+- `main.c` — main program (uses the singly linked list API)
+- `singly_linked_list.h` — linked list interface
+- `singly_linked_list.c` — linked list implementation
+- `playlist-out.txt` — output playlist produced by the program
+
+## Requirements
+- C compiler (tested with GCC/Clang)
+- UTF-8 capable terminal/editor (the playlist contains non-ASCII characters and emoji)
+
+## Build
+Compile with gcc:
+```
+gcc -std=c11 -Wall -Wextra -o playlist main.c singly_linked_list.c
+```
+
+## Run
+Place your `playlist.txt` in the same directory (example content below). Then run:
+```
+./playlist
+```
+After the program runs, inspect `playlist-out.txt` for the modified playlist.
+
+## Example input (`playlist.txt`)
+Bad Guy – Billie Eilish 👽
+Bohemian Rhapsody - Queen 🎤
+Billie Jean – Michael Jackson 🕺
+Rolling in the Deep – Adele 🌊
+Smells Like Teen Spirit – Nirvana 🤘
+
+## Expected `playlist-out.txt` after running
+Bad Guy – Billie Eilish 👽
+Bohemian Rhapsody - Queen 🎤
+Billie Jean – Michael Jackson 🕺
+Tarkan – Şımarık 💋
+Rolling in the Deep – Adele 🌊
+Smells Like Teen Spirit – Nirvana 🤘
+
+(Note: The provided main.c in the template deletes item at index 4, then inserts the new track at index 3 — the example output above corresponds to the highlighted behavior in the template.)
+
+## Notes
+- The program uses fixed filenames defined by `PLAYLIST_IN_PATH` and `PLAYLIST_OUT_PATH`.
+- Make sure your `playlist.txt` lines are no longer than `TRACK_TITLE_SIZE` (60 characters) or adjust the constant accordingly.
+- For portability, compile with `-fexec-charset=UTF-8` or ensure your environment treats files as UTF-8 if you see character corruption.
+
